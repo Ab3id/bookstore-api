@@ -1,9 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Book } from '@prisma/client';
-import { LoginUserDTO } from '../auth/auth.dto';
-import { BookDTO } from './book.dto';
 
+import { BookDTO } from './book.dto';
 import { BookService } from './book.service';
 
 @ApiTags('books')
