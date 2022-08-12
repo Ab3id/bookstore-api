@@ -3,23 +3,33 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean? @default(false)
-  authorId  Int?
-  User      User?    @relation(fields: [authorId], references: [id])
-}
 
 model User {
-  id        Int     @id @default(autoincrement())
+  id        Int     @id @default(autoincrement()) 
   email     String  @unique
   password  String
   name      String?
-  Post      Post[]
+  booksLease BooksLease[]
+}
+
+model Book {
+  id Int @id @default(autoincrement()) @unique
+  booksLease BooksLease[]
+  title String
+  author String
+  published_at DateTime
+  created_at DateTime
+  count Int
+}
+
+model BooksLease {
+  id Int @id @default(autoincrement()) @unique
+  bookId Int
+  book Book @relation(fields: [bookId],references: [id])
+  userId Int
+  user User @relation(fields: [userId],references: [id])
 }
