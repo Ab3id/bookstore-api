@@ -22,8 +22,8 @@ model Book {
   title String
   author String
   published_at DateTime
-  created_at DateTime
-  count Int
+  created_at DateTime @default(now())
+  count Int @default(1)
 }
 
 model BooksLease {
